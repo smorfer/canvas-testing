@@ -1,4 +1,6 @@
 var canvas = document.getElementById('canvas');
+var input = document.getElementById('input');
+var button = document.getElementById('button');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -64,11 +66,15 @@ function Circle(x , y, radius, dx, dy, color) {
 
 var circles = [];
 
-function init() {
+function init(quantity) {
 
         circles = [];
 
-        for (var i = 0; i < 500; i++) {
+        if (quantity === undefined) {
+                quantity = 500;
+        }
+
+        for (var i = 0; i < quantity; i++) {
 
                 var radius = Math.random()* 10+1;
                 var x = Math.random()*(window.innerWidth-radius*2)+radius;
@@ -100,11 +106,19 @@ window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         init();
-})
+});
 
 canvas.addEventListener('mousemove', (event) => {
         mouseX = event.clientX;
         mouseY = event.clientY;
+
+});
+
+button.addEventListener('click', () => {
+        var parsed_input = parseInt(input.value, 10);
+        if (!isNaN(parsed_input)) {
+                init(parsed_input);
+        }
 
 })
 
